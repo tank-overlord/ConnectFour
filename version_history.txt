@@ -1,0 +1,3 @@
+Nov 22, 2021
+------------
+version 0.0.1: minimax vs. minimax, using both hashmap and alpha-beta pruning to speed up
