@@ -122,36 +122,13 @@ class game(object):
             return score
         grid_hash_value = self.grid_hash()
         if isMaximizing: # X ("alpha" player) plays
-            if self.use_hashmap:
-                if grid_hash_value not in self.maximizer_best_moves_hashmap:
-                    score_move_dict = {}
-                    best_score = float('-inf')
-                    available_moves = self.find_available_moves()
-                    available_moves = random.sample(available_moves, len(available_moves))
-                    for move in available_moves:
-                        self.move(player = 1, move = move)
-                        score = self.minimax_score(alpha = alpha, beta = beta, isMaximizing = False)
-                        self.undo_move(player = 1, move = move)
-                        if score not in score_move_dict:
-                            score_move_dict[score] = [move,]
-                        else:
-                            score_move_dict[score].append(move)                            
-                        best_score = max(best_score, score)
-                        alpha = max(alpha, best_score)
-                        if self.use_alpha_beta_pruning and beta <= alpha:
-                            if best_score == 1: # this is to save the alpha beta pruning when used in conjunction with hashmap. if the "best_score" cannot be better, it must be the best_score
-                                if self.verbosity >= 2:
-                                    print('β cutoff')
-                                break # parent beta cutoff
-                    self.maximizer_best_moves_hashmap[grid_hash_value] = list(score_move_dict[best_score])
-                    return best_score
-                else:
-                    best_move = random.sample(self.maximizer_best_moves_hashmap[grid_hash_value], 1)[0]
-                    self.move(player = 1, move = best_move)
-                    best_score = self.minimax_score(alpha = alpha, beta = beta, isMaximizing = False)
-                    self.undo_move(player = 1, move = best_move)
-                    #alpha = max(alpha, best_score)
-                    return best_score
+            if self.use_hashmap and grid_hash_value in self.maximizer_best_moves_hashmap:
+                best_move = random.sample(self.maximizer_best_moves_hashmap[grid_hash_value], 1)[0]
+                self.move(player = 1, move = best_move)
+                best_score = self.minimax_score(alpha = alpha, beta = beta, isMaximizing = False)
+                self.undo_move(player = 1, move = best_move)
+                #alpha = max(alpha, best_score)
+                return best_score
             else:
                 best_score = float('-inf')
                 available_moves = self.find_available_moves()
@@ -168,36 +145,13 @@ class game(object):
                         break # parent beta cutoff
                 return best_score
         else: # O ("beta" player) plays
-            if self.use_hashmap:
-                if grid_hash_value not in self.minimizer_best_moves_hashmap:
-                    score_move_dict = {}
-                    best_score = float('+inf')
-                    available_moves = self.find_available_moves()
-                    available_moves = random.sample(available_moves, len(available_moves))
-                    for move in available_moves:
-                        self.move(player = -1, move = move)
-                        score = self.minimax_score(alpha = alpha, beta = beta, isMaximizing = True)
-                        self.undo_move(player = -1, move = move)
-                        if score not in score_move_dict:
-                            score_move_dict[score] = [move,]
-                        else:
-                            score_move_dict[score].append(move)                            
-                        best_score = min(best_score, score)
-                        beta = min(beta, best_score)
-                        if self.use_alpha_beta_pruning and beta <= alpha:
-                            if best_score == -1: # this is to save the alpha beta pruning when used in conjunction with hashmap. if the "best_score" cannot be better, it must be the best_score
-                                if self.verbosity >= 2:
-                                    print('α cutoff')
-                                break # parent alpha cutoff
-                    self.minimizer_best_moves_hashmap[grid_hash_value] = list(score_move_dict[best_score])
-                    return best_score
-                else:
-                    best_move = random.sample(self.minimizer_best_moves_hashmap[grid_hash_value], 1)[0]
-                    self.move(player = -1, move = best_move)
-                    best_score = self.minimax_score(alpha = alpha, beta = beta, isMaximizing = True)
-                    self.undo_move(player = -1, move = best_move)
-                    #beta = min(beta, best_score)
-                    return best_score
+            if self.use_hashmap and grid_hash_value in self.minimizer_best_moves_hashmap:
+                best_move = random.sample(self.minimizer_best_moves_hashmap[grid_hash_value], 1)[0]
+                self.move(player = -1, move = best_move)
+                best_score = self.minimax_score(alpha = alpha, beta = beta, isMaximizing = True)
+                self.undo_move(player = -1, move = best_move)
+                #beta = min(beta, best_score)
+                return best_score
             else:
                 best_score = float('+inf')
                 available_moves = self.find_available_moves()
@@ -248,7 +202,6 @@ class game(object):
                                 score_move_dict[score].append(move)
                             if score > X_best_score:
                                 X_best_score = score
-                                xmove = move
                         self.maximizer_best_moves_hashmap[grid_hash_value] = list(score_move_dict[X_best_score])
                     xmove = random.sample(self.maximizer_best_moves_hashmap[grid_hash_value], 1)[0]
                 else:
@@ -281,7 +234,6 @@ class game(object):
                                 score_move_dict[score].append(move)
                             if O_best_score > score:
                                 O_best_score = score
-                                omove = move
                         self.minimizer_best_moves_hashmap[grid_hash_value] = list(score_move_dict[O_best_score])
                     omove = random.sample(self.minimizer_best_moves_hashmap[grid_hash_value], 1)[0]
                 else:
