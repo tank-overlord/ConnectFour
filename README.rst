@@ -41,11 +41,9 @@ Run
 Sample Screenshot
 -----------------
 |image_win|
-|image_draw|
 
 
 .. |image_win| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/example-win.gif
-.. |image_draw| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/example-draw.gif
 
 
 
