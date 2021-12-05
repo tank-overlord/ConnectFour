@@ -78,7 +78,7 @@ class game():
                 res.append((self.available_row_in_col[col], col))
         return res
 
-    def print_grid(self, use_color: bool = True, show_winner: bool = False):
+    def print_grid(self, show_winner: bool = False):
         if show_winner:
             res = self.checkwin()
             if res['winner'] in [1, -1]:
@@ -92,12 +92,12 @@ class game():
                     if (r, c) in winning_squares:
                         print(f"{textcolors.green}{self.map[self.grid[(r,c)]]}{textcolors.reset}|", end = '')
                     else:
-                        if use_color:
+                        if self.use_color:
                             print(f"{self.color_map[self.grid[(r,c)]]}|", end = '')
                         else:
                             print(f"{self.map[self.grid[(r,c)]]}|", end = '')                        
                 else:
-                    if use_color:
+                    if self.use_color:
                         print(f"{self.color_map[self.grid[(r,c)]]}|", end = '')
                     else:
                         print(f"{self.map[self.grid[(r,c)]]}|", end = '')
@@ -364,11 +364,12 @@ class game():
             else:
                 self.print_grid(show_winner=True)
 
-    def trials(self, max_depth: int = 5, n_trials: int = 1, verbosity: int = 1, use_hashmap: bool = False, use_alpha_beta_pruning: bool = True, output_as_image: bool = False):
+    def trials(self, max_depth: int = 5, n_trials: int = 1, verbosity: int = 1, use_hashmap: bool = False, use_alpha_beta_pruning: bool = True, use_color: bool = True, output_as_image: bool = False):
         self.max_depth = max_depth
         self.verbosity = verbosity
         self.use_hashmap = use_hashmap
         self.use_alpha_beta_pruning = use_alpha_beta_pruning
+        self.use_color = use_color
         self.output_as_image = output_as_image
         x_won = o_won = draw = 0
         self.start = time.time()

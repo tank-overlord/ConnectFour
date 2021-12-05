@@ -6,4 +6,4 @@
 
 from ConnectFour import game
 g = game()
-g.trials(max_depth=3)
+g.trials(max_depth=3, use_color=False)
