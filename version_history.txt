@@ -1,7 +1,8 @@
 Dec 4, 2021
 ------------
-version 0.0.2: minimax vs. minimax, using max.depth, hashmap, and alpha-beta pruning to speed up
-               importance in improving Time Complexity: max.depth > alpha-beta pruning > hashmap
-               because the potential max. depth = 6 x 7 = 42, which means 2^42 combinations!
+version 0.0.3: minimax vs. minimax, using (1) max.depth, (2) hashmap, and (3) alpha-beta pruning to speed up
+               importance in improving Time Complexity: max.depth > hashmap > alpha-beta pruning
+               this is because the potential max. depth = 6 x 7 = 42, which means 2^42 combinations!
                limiting max.depth = 5 means a lot less combinations;
-               hashmap is not that helpful because many combinations tend to be unique
+               hashmap is helpful because it remembers the best moves from previous games
+               

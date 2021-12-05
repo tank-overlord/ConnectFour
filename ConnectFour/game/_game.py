@@ -29,7 +29,7 @@ class textcolors:
 
 class game():
 
-    def __init__(self, preload_hashmap = False):
+    def __init__(self, preload_hashmap = True):
         self.map = {1: 'X', 0: ' ', -1: 'O'}
         self.color_map = {1: f"{textcolors.yellow}X{textcolors.reset}", 0: ' ', -1: f"{textcolors.red}O{textcolors.reset}"}
         if preload_hashmap:
@@ -41,8 +41,11 @@ class game():
         self.bbox = ((5,120,680,685)) # for full-screen screenshot with font size = 36 pt in Terminal
 
     def build_hashmap(self):
-        for max_depth in range(1, 4):
-            self.trials(verbosity = 0, n_trials = 10, max_depth=max_depth, use_alpha_beta_pruning = False, use_hashmap = True)
+        for max_depth in range(3, 6):
+            self.trials(verbosity = 0, n_trials = 10, max_depth=max_depth, use_alpha_beta_pruning = True, use_hashmap = True)
+        self.save_hashmap()
+
+    def save_hashmap(self):
         with open('./ConnectFour/hashmap/maximizer_best_moves.gz', 'wb') as fp:
             fp.write(zlib.compress(pickle.dumps(self.maximizer_best_moves_hashmap, pickle.HIGHEST_PROTOCOL),9))
             fp.close()
@@ -364,7 +367,7 @@ class game():
             else:
                 self.print_grid(show_winner=True)
 
-    def trials(self, max_depth: int = 5, n_trials: int = 1, verbosity: int = 1, use_hashmap: bool = False, use_alpha_beta_pruning: bool = True, use_color: bool = True, output_as_image: bool = False):
+    def trials(self, max_depth: int = 5, n_trials: int = 1, verbosity: int = 1, use_hashmap: bool = True, use_alpha_beta_pruning: bool = True, use_color: bool = True, output_as_image: bool = False):
         self.max_depth = max_depth
         self.verbosity = verbosity
         self.use_hashmap = use_hashmap
