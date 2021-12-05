@@ -43,7 +43,7 @@ Sample Screenshot
 |image1|
 
 
-.. |image1| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/example-draw.gif
+.. |image1| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/example-win.gif
 
 
 
