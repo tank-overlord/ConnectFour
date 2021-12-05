@@ -291,13 +291,13 @@ class game():
                 else:
                     self.print_grid(show_winner=False)
             grid_hash_value = self.grid_hash()
+            available_moves = self.find_available_moves()
+            available_moves = random.sample(available_moves, len(available_moves))
             if player == 1:
+                X_best_score = float('-inf')
                 if self.use_hashmap:
                     if grid_hash_value not in self.maximizer_best_moves_hashmap:
                         score_move_dict = {}
-                        X_best_score = float('-inf')
-                        available_moves = self.find_available_moves()
-                        available_moves = random.sample(available_moves, len(available_moves))
                         for move in available_moves:
                             self.move(player=player, move=move)
                             score = self.minimax_score(depth = 0, isMaximizing = False) # see what score 'X' can still have in this situation, assuming 'O' plays optimally next
@@ -311,9 +311,6 @@ class game():
                         self.maximizer_best_moves_hashmap[grid_hash_value] = list(score_move_dict[X_best_score])
                     xmove = random.sample(self.maximizer_best_moves_hashmap[grid_hash_value], 1)[0]
                 else:
-                    X_best_score = float('-inf')
-                    available_moves = self.find_available_moves()
-                    available_moves = random.sample(available_moves, len(available_moves))
                     for move in available_moves:
                         self.move(player=player, move=move)
                         score = self.minimax_score(depth = 0, isMaximizing = False) # see what score 'X' can still have in this situation, assuming 'O' plays optimally next
@@ -324,12 +321,10 @@ class game():
                 self.move(player=player, move=xmove)
                 player = -1
             else:
+                O_best_score = float('+inf')
                 if self.use_hashmap:
                     if grid_hash_value not in self.minimizer_best_moves_hashmap:
                         score_move_dict = {}
-                        O_best_score = float('+inf')
-                        available_moves = self.find_available_moves()
-                        available_moves = random.sample(available_moves, len(available_moves))
                         for move in available_moves:
                             self.move(player=player, move=move)
                             score = self.minimax_score(depth = 0, isMaximizing = True) # see what score 'O' can still have in this situation, assuming 'X' plays optimally next
@@ -343,9 +338,6 @@ class game():
                         self.minimizer_best_moves_hashmap[grid_hash_value] = list(score_move_dict[O_best_score])
                     omove = random.sample(self.minimizer_best_moves_hashmap[grid_hash_value], 1)[0]
                 else:
-                    O_best_score = float('+inf')
-                    available_moves = self.find_available_moves()
-                    available_moves = random.sample(available_moves, len(available_moves))
                     for move in available_moves:
                         self.move(player=player, move=move)
                         score = self.minimax_score(depth = 0, isMaximizing = True) # see what score 'O' can still have in this situation, assuming 'X' plays optimally next

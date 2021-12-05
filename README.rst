@@ -40,10 +40,12 @@ Run
 
 Sample Screenshot
 -----------------
-|image1|
+|image_win|
+|image_draw|
 
 
-.. |image1| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/example-win.gif
+.. |image_win| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/example-win.gif
+.. |image_draw| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/example-draw.gif
 
 
 
