@@ -90,7 +90,7 @@ class game():
             for c in range(self.grid_width):
                 if show_winner:
                     if (r, c) in winning_squares:
-                        print(f"{textcolors.green}{self.map[self.grid[(r,c)]]}{textcolors.reset}|", end = '')
+                        print(f"{textcolors.cyan}{self.map[self.grid[(r,c)]]}{textcolors.reset}|", end = '')
                     else:
                         if self.use_color:
                             print(f"{self.color_map[self.grid[(r,c)]]}|", end = '')
