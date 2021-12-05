@@ -35,6 +35,7 @@ Run
 
 >>> from ConnectFour import game
 >>> g = game()
+>>> g.trials(n_trials=1, max_depth=5)
 
 
 Sample Screenshot

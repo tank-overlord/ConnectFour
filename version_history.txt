@@ -1,3 +1,7 @@
-Nov 22, 2021
+Dec 4, 2021
 ------------
-version 0.0.1: minimax vs. minimax, using both hashmap and alpha-beta pruning to speed up
+version 0.0.2: minimax vs. minimax, using max.depth, hashmap, and alpha-beta pruning to speed up
+               importance in improving Time Complexity: max.depth > alpha-beta pruning > hashmap
+               because the potential max. depth = 6 x 7 = 42, which means 2^42 combinations!
+               limiting max.depth = 5 means a lot less combinations;
+               hashmap is not that helpful because many combinations tend to be unique
