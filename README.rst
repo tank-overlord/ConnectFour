@@ -35,7 +35,7 @@ Run
 
 >>> from ConnectFour import game
 >>> g = game()
->>> g.trials(n_trials=1, max_depth=5)
+>>> g.trials(max_depth=5)
 
 
 Sample Screenshot
@@ -43,7 +43,7 @@ Sample Screenshot
 |image1|
 
 
-.. |image1| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/game1.png
+.. |image1| image:: https://github.com/tank-overlord/ConnectFour/raw/main/ConnectFour/examples/example-draw.gif
 
 
 
